@@ -1,0 +1,78 @@
+{
+	"name": "scriptactivity",
+	"properties": {
+		"activities": [
+			{
+				"name": "Script1",
+				"type": "Script",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"linkedServiceName": {
+					"referenceName": "lsmetadata",
+					"type": "LinkedServiceReference"
+				},
+				"typeProperties": {
+					"scripts": [
+						{
+							"parameters": [
+								{
+									"name": "Name",
+									"type": "String",
+									"value": "Virat Kohli",
+									"direction": "Input"
+								}
+							],
+							"type": "Query",
+							"text": "select * from Employees where Name=@Name"
+						},
+						{
+							"parameters": [
+								{
+									"name": "Title",
+									"type": "String",
+									"value": "Eega",
+									"direction": "Input"
+								}
+							],
+							"type": "Query",
+							"text": "select * from movies where Title=@Title"
+						},
+						{
+							"parameters": [
+								{
+									"name": "player_name",
+									"type": "String",
+									"value": "Rohit Sharma",
+									"direction": "Input"
+								}
+							],
+							"type": "Query",
+							"text": "select * from cricket where player_name=@player_name"
+						}
+					],
+					"scriptBlockExecutionTimeout": "02:00:00",
+					"logSettings": {
+						"logDestination": "ExternalStore",
+						"logLocationSettings": {
+							"linkedServiceName": {
+								"referenceName": "lsscriptactivity",
+								"type": "LinkedServiceReference"
+							},
+							"path": "suracontainer/output1"
+						}
+					}
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2023-06-05T04:06:18Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

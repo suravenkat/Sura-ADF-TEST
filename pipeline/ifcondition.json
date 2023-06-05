@@ -1,0 +1,49 @@
+{
+	"name": "ifcondition",
+	"properties": {
+		"activities": [
+			{
+				"name": "IfCondition",
+				"type": "IfCondition",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"expression": {
+						"value": "@contains(pipeline().parameters.input,'customer')",
+						"type": "Expression"
+					},
+					"ifFalseActivities": [
+						{
+							"name": "falseactivity",
+							"type": "Wait",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"waitTimeInSeconds": 1
+							}
+						}
+					],
+					"ifTrueActivities": [
+						{
+							"name": "trueactivity",
+							"type": "Wait",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"waitTimeInSeconds": 2
+							}
+						}
+					]
+				}
+			}
+		],
+		"parameters": {
+			"input": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-05-30T10:35:41Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

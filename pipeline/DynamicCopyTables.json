@@ -1,0 +1,119 @@
+{
+	"name": "DynamicCopyTables",
+	"properties": {
+		"activities": [
+			{
+				"name": "ForEach1",
+				"type": "ForEach",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@pipeline().parameters.inputtables",
+						"type": "Expression"
+					},
+					"isSequential": false,
+					"activities": [
+						{
+							"name": "Copy data1",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "AzureSqlSource",
+									"queryTimeout": "02:00:00",
+									"partitionOption": "None"
+								},
+								"sink": {
+									"type": "DelimitedTextSink",
+									"storeSettings": {
+										"type": "AzureBlobFSWriteSettings"
+									},
+									"formatSettings": {
+										"type": "DelimitedTextWriteSettings",
+										"quoteAllText": true,
+										"fileExtension": ".txt"
+									}
+								},
+								"enableStaging": false,
+								"translator": {
+									"type": "TabularTranslator",
+									"typeConversion": true,
+									"typeConversionSettings": {
+										"allowDataTruncation": true,
+										"treatBooleanAsNumber": false
+									}
+								}
+							},
+							"inputs": [
+								{
+									"referenceName": "dsDynamiSQL",
+									"type": "DatasetReference",
+									"parameters": {
+										"tableSchemaName": {
+											"value": "@item().tableSchemaName",
+											"type": "Expression"
+										},
+										"tableName": {
+											"value": "@item().tableName",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "dsDynamicADLS",
+									"type": "DatasetReference",
+									"parameters": {
+										"tablefolder": {
+											"value": "@item().tableName",
+											"type": "Expression"
+										},
+										"filename": {
+											"value": "@item().filename",
+											"type": "Expression"
+										}
+									}
+								}
+							]
+						}
+					]
+				}
+			}
+		],
+		"parameters": {
+			"inputtables": {
+				"type": "array",
+				"defaultValue": [
+					{
+						"tableName": "movies",
+						"tableSchemaName": "dbo",
+						"filename": "movies_source"
+					},
+					{
+						"tableName": "cricket",
+						"tableSchemaName": "dbo",
+						"filename": "cricket_source"
+					},
+					{
+						"tableName": "football",
+						"tableSchemaName": "dbo",
+						"filename": "football_source"
+					}
+				]
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-05-31T04:42:47Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

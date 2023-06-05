@@ -1,0 +1,54 @@
+{
+	"name": "untilpipeline1",
+	"properties": {
+		"activities": [
+			{
+				"name": "Until1",
+				"type": "Until",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"expression": {
+						"value": "@equals(pipeline().parameters.input_colour,'green' )",
+						"type": "Expression"
+					},
+					"activities": [
+						{
+							"name": "Lookup1",
+							"type": "Lookup",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "AzureSqlSource",
+									"queryTimeout": "02:00:00",
+									"partitionOption": "None"
+								},
+								"dataset": {
+									"referenceName": "dsuntilllookup",
+									"type": "DatasetReference"
+								}
+							}
+						}
+					],
+					"timeout": "0.00:10:00"
+				}
+			}
+		],
+		"parameters": {
+			"input_colour": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-06-02T05:54:02Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

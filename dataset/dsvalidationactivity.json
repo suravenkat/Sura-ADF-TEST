@@ -1,0 +1,31 @@
+{
+	"name": "dsvalidationactivity",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "lsadlsstorage",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"input_folder": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": {
+					"value": "@dataset().input_folder",
+					"type": "Expression"
+				},
+				"fileSystem": "suracontainer"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

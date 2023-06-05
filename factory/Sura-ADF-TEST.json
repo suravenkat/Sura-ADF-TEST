@@ -1,0 +1,9 @@
+{
+	"name": "Sura-ADF-TEST",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "04bd330e-0897-4539-9658-1695e8bd9dc3",
+		"tenantId": "29f017d3-06ad-4ebf-b110-0f62b7ac9ba1"
+	}
+}

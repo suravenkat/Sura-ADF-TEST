@@ -1,0 +1,50 @@
+{
+	"name": "filter",
+	"properties": {
+		"activities": [
+			{
+				"name": "agefilter",
+				"type": "Filter",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@pipeline().parameters.paramm",
+						"type": "Expression"
+					},
+					"condition": {
+						"value": "@greater(item(),30)",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"parameters": {
+			"paramm": {
+				"type": "array",
+				"defaultValue": [
+					10,
+					20,
+					30,
+					40,
+					50
+				]
+			}
+		},
+		"variables": {
+			"age": {
+				"type": "Array",
+				"defaultValue": [
+					10,
+					20,
+					30,
+					40,
+					50
+				]
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-05-31T04:42:47Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

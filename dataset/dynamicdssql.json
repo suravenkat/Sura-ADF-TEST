@@ -1,0 +1,31 @@
+{
+	"name": "dynamicdssql",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "lsazuresql",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"tableSchemaName": {
+				"type": "string"
+			},
+			"tableName": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": {
+				"value": "@dataset().tableSchemaName",
+				"type": "Expression"
+			},
+			"table": {
+				"value": "@dataset().tableName",
+				"type": "Expression"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
